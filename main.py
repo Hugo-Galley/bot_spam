@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+from customtkinter import *
+from CTkMessagebox import CTkMessagebox
 
 
 def spam_insta(id,pwd,victime,message,nbr_message):
@@ -68,5 +70,61 @@ def spam_insta(id,pwd,victime,message,nbr_message):
         envoyer_message =driver.find_element(By.CSS_SELECTOR,'.x1i10hfl.xjqpnuy.xa49m3k.xqeqjp1.x2hbi6w.xdl72j9.x2lah0s.xe8uvvx.xdj266r.xat24cr.x1mh8g0r.x2lwn1j.xeuugli.x1hl2dhg.xggy1nq.x1ja2u2z.x1t137rt.x1q0g3np.x1lku1pv.x1a2a7pz.x6s0dn4.xjyslct.x1ejq31n.xd10rxx.x1sy0etr.x17r0tee.x9f619.x1ypdohk.x1f6kntn.xwhw2v2.xl56j7k.x17ydfre.x2b8uid.xlyipyv.x87ps6o.x14atkfc.xcdnw81.x1i0vuye.xjbqb8w.xm3z3ea.x1x8b98j.x131883w.x16mih1h.x972fbf.xcfux6l.x1qhh985.xm0m39n.xt0psk2.xt7dq6l.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x1n2onr6.x1n5bzlp.x173jzuc.x1yc6y37.xfs2ol5')
         envoyer_message.click()
 
+def interface_graphique():
 
-input("Cliquer pour fermer la fenetre")
+    def recup_info():
+        if  username_entry.get() == '' or mdp_entry.get() == '' or user_victime_entry.get() == '' or mess_entry.get() == '' or int(nbr_msg_entry.get()) <= 0:
+            CTkMessagebox(title='Erreur', message='Veuillez remplir tout les champs',icon='cancel')
+        else :
+            spam_insta(username_entry.get(), mdp_entry.get(),  user_victime_entry.get(), mess_entry.get(), int(nbr_msg_entry.get()))
+
+    windows = CTk()
+    windows.title("Bot Instagram")
+    windows.geometry("720x430")
+    windows.minsize(650,380)
+
+    frame_intro = CTkFrame(windows)
+
+    titre = CTkLabel(frame_intro, text='Bot Instagram', font=("Courrier", 50))
+    titre.pack()
+
+    explication = CTkLabel(frame_intro,
+                           text='Ce programme est un bot instagram qui vous permet d envoyer des messages de masse à vos amis',
+                           font=('Courrier', 15))
+    explication.pack()
+
+    frame_intro.pack(side=TOP)
+
+    frame_info = CTkFrame(windows)
+
+    CTkLabel(frame_info, text="Nom d'utilisateur").grid(row=0, column=0)
+    CTkLabel(frame_info, text="Mot de passe").grid(row=1, column=0)
+    CTkLabel(frame_info, text="Utilisateur victime").grid(row=2, column=0)
+    CTkLabel(frame_info, text="Message").grid(row=3, column=0)
+    CTkLabel(frame_info, text="Nombre de messages").grid(row=4, column=0)
+
+    username_entry = CTkEntry(frame_info)
+    username_entry.grid(row=0, column=1)
+
+    mdp_entry = CTkEntry(frame_info)
+    mdp_entry.grid(row=1, column=1)
+
+    user_victime_entry = CTkEntry(frame_info)
+    user_victime_entry.grid(row=2, column=1)
+
+    mess_entry = CTkEntry(frame_info)
+    mess_entry.grid(row=3, column=1)
+
+    nbr_msg_entry = CTkEntry(frame_info)
+    nbr_msg_entry.grid(row=4, column=1)
+    frame_info.pack(pady=25)
+
+    Lancement_bot_button = CTkButton(windows, text='Lancer le bot', font=("Courrier", 10), command=recup_info).pack(
+        pady=25, fill=X)
+
+    windows.mainloop()
+
+if __name__ == "__main__":
+    interface_graphique()
+
+
