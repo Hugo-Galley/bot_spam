@@ -13,15 +13,20 @@ Ce script utilise Selenium pour envoyer des messages en masse sur Instagram.
 ```bash
 pip install selenium
 ```
+```bash
+pip install customtkinter
+```
+```bash
+pip install CTkMessagebox   
+```
 
 ### Utilisation
-1. Assurez-vous d'avoir installé les dépendances nécessaires.
-2. Modifiez les paramètres dans le script selon vos besoins :
-    - `id` : Votre identifiant Instagram.
-    - `pwd` : Votre mot de passe Instagram.
-    - `victime` : Le nom d'utilisateur de la personne que vous souhaitez cibler.
-    - `message` : Le message que vous souhaitez envoyer.
-    - `nbr_message` : Le nombre de fois que vous souhaitez envoyer le message.
+
+Pour cela il vous suffit de lancer le fichier main
+```bash
+python3 main.py  
+```
+
 
 ### Attention
 - Utilisez ce script avec précaution pour éviter d'être bloqué par Instagram.
