@@ -8,8 +8,17 @@ from customtkinter import *
 from CTkMessagebox import CTkMessagebox
 
 
-def spam_insta(id,pwd,victime,message,nbr_message):
-    driver = webdriver.Chrome()
+def spam_insta(id,pwd,victime,message,nbr_message,navigateur):
+
+    if navigateur == 'Chrome':
+        driver = webdriver.Chrome()
+    elif navigateur == 'Firefox':
+        driver = webdriver.Firefox()
+    elif navigateur == 'Safari':
+        driver = webdriver.Safari()
+    elif navigateur == 'Edge':
+        driver = webdriver.Edge()
+
     driver.get("https://instagram.com")
 
     wait = WebDriverWait(driver, 10)
@@ -76,7 +85,7 @@ def interface_graphique():
         if  username_entry.get() == '' or mdp_entry.get() == '' or user_victime_entry.get() == '' or mess_entry.get() == '' or int(nbr_msg_entry.get()) <= 0:
             CTkMessagebox(title='Erreur', message='Veuillez remplir tout les champs',icon='cancel')
         else :
-            spam_insta(username_entry.get(), mdp_entry.get(),  user_victime_entry.get(), mess_entry.get(), int(nbr_msg_entry.get()))
+            spam_insta(username_entry.get(), mdp_entry.get(),  user_victime_entry.get(), mess_entry.get(), int(nbr_msg_entry.get()),choix_navigateur.get())
 
     windows = CTk()
     windows.title("Bot Instagram")
@@ -102,6 +111,7 @@ def interface_graphique():
     CTkLabel(frame_info, text="Utilisateur victime").grid(row=2, column=0)
     CTkLabel(frame_info, text="Message").grid(row=3, column=0)
     CTkLabel(frame_info, text="Nombre de messages").grid(row=4, column=0)
+    CTkLabel(frame_info, text='Navigateur').grid(row=5,column=0)
 
     username_entry = CTkEntry(frame_info)
     username_entry.grid(row=0, column=1)
@@ -117,6 +127,11 @@ def interface_graphique():
 
     nbr_msg_entry = CTkEntry(frame_info)
     nbr_msg_entry.grid(row=4, column=1)
+
+    choix_navigateur = CTkComboBox(frame_info,values=['Chrome','Firefox','Safari','Edge'])
+    choix_navigateur.grid(row=5,column=1)
+    choix_navigateur.set('Chrome')
+
     frame_info.pack(pady=25)
 
     Lancement_bot_button = CTkButton(windows, text='Lancer le bot', font=("Courrier", 10), command=recup_info).pack(
