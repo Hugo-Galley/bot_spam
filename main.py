@@ -74,7 +74,8 @@ def spam_insta(id,pwd,victime,message,nbr_message,navigateur,vitesse_envoie):
     ajout_discussion.click()
     time.sleep(2)
 
-    for i in range(nbr_message):
+    for i in range(100):
+
         time.sleep(vitesse_envoie)
         ajout_message = driver.find_element(By.CSS_SELECTOR, '.xzsf02u.x1a2a7pz.x1n2onr6.x14wi4xw.x1iyjqo2.x1gh3ibb.xisnujt.xeuugli.x1odjw0f')
         ajout_message.send_keys(message)
@@ -88,7 +89,7 @@ def interface_graphique():
         if  username_entry.get() == '' or mdp_entry.get() == '' or user_victime_entry.get() == '' or mess_entry.get() == '' or int(nbr_msg_entry.get()) <= 0:
             CTkMessagebox(title='Erreur', message='Veuillez remplir tout les champs',icon='cancel')
         else :
-            spam_insta(username_entry.get(), mdp_entry.get(),  user_victime_entry.get(), mess_entry.get(), int(nbr_msg_entry.get()),choix_navigateur.get(),choix_vitesse.get())
+            spam_insta(username_entry.get(), mdp_entry.get(),  user_victime_entry.get(), mess_entry.get(), int(nbr_msg_entry.get()),choix_navigateur.get(),choix_vitesse.get()/1000)
 
 
 
