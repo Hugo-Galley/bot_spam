@@ -6,7 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 from customtkinter import *
 from CTkMessagebox import CTkMessagebox
-from PIL import Image,ImageTk
 
 
 def spam_insta(id,pwd,victime,message,nbr_message,navigateur,vitesse_envoie):
