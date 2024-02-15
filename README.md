@@ -26,6 +26,8 @@ Pour cela il vous suffit de lancer le fichier main
 ```bash
 python3 main.py  
 ```
+## Appercu de l'interface
+![Interface Graphique](assets/appercu.png)
 
 
 ### Attention
