@@ -6,9 +6,11 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 from customtkinter import *
 from CTkMessagebox import CTkMessagebox
+from PIL import Image,ImageTk
 
 
 def spam_insta(id,pwd,victime,message,nbr_message,navigateur,vitesse_envoie):
+
 
     if navigateur == 'Chrome':
         driver = webdriver.Chrome()
@@ -21,7 +23,7 @@ def spam_insta(id,pwd,victime,message,nbr_message,navigateur,vitesse_envoie):
 
     driver.get("https://instagram.com")
 
-    wait = WebDriverWait(driver, 30)
+    wait = WebDriverWait(driver, 10)
     wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class, '_a9--') and contains(@class, '_ap36') and contains(@class, '_a9_0')]")))
 
     time.sleep(1)
@@ -33,7 +35,6 @@ def spam_insta(id,pwd,victime,message,nbr_message,navigateur,vitesse_envoie):
     id_enter = driver.find_element(By.XPATH, "//*[@id='loginForm']/div/div[1]/div/label/input")
     id_enter.clear()
     id_enter.send_keys(id)
-    time.sleep(2)
 
     wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[aria-label='Mot de passe']")))
 
@@ -42,7 +43,7 @@ def spam_insta(id,pwd,victime,message,nbr_message,navigateur,vitesse_envoie):
     id_pwd.send_keys(pwd)
 
     id_pwd.send_keys(Keys.RETURN)
-    time.sleep(7)
+
 
     bouton_plus_tard = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".x1i10hfl.xjqpnuy.xa49m3k.xqeqjp1.x2hbi6w.xdl72j9.x2lah0s.xe8uvvx.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.x2lwn1j.xeuugli.x1hl2dhg.xggy1nq.x1ja2u2z.x1t137rt.x1q0g3np.x1lku1pv.x1a2a7pz.x6s0dn4.xjyslct.x1ejq31n.xd10rxx.x1sy0etr.x17r0tee.x9f619.x1ypdohk.x1f6kntn.xwhw2v2.xl56j7k.x17ydfre.x2b8uid.xlyipyv.x87ps6o.x14atkfc.xcdnw81.x1i0vuye.xjbqb8w.xm3z3ea.x1x8b98j.x131883w.x16mih1h.x972fbf.xcfux6l.x1qhh985.xm0m39n.xt0psk2.xt7dq6l.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x1n2onr6.x1n5bzlp.x173jzuc.x1yc6y37")))
     bouton_plus_tard.click()
@@ -58,6 +59,7 @@ def spam_insta(id,pwd,victime,message,nbr_message,navigateur,vitesse_envoie):
 
     time.sleep(2)
     wait = WebDriverWait(driver, 10)
+    time.sleep(1)
     bouton_nouveau_message = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".x1i10hfl.x972fbf.xcfux6l.x1qhh985.xm0m39n.x9f619.xe8uvvx.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.x16tdsg8.x1hl2dhg.xggy1nq.x1a2a7pz.x6s0dn4.xjbqb8w.x1ejq31n.xd10rxx.x1sy0etr.x17r0tee.x1ypdohk.x78zum5.xl56j7k.x1y1aw1k.x1sxyh0.xwib8y2.xurb0ha.xcdnw81")))
     bouton_nouveau_message.click()
     time.sleep(2)
@@ -74,7 +76,7 @@ def spam_insta(id,pwd,victime,message,nbr_message,navigateur,vitesse_envoie):
     ajout_discussion.click()
     time.sleep(2)
 
-    for i in range(100):
+    for i in range(nbr_message):
 
         time.sleep(vitesse_envoie)
         ajout_message = driver.find_element(By.CSS_SELECTOR, '.xzsf02u.x1a2a7pz.x1n2onr6.x14wi4xw.x1iyjqo2.x1gh3ibb.xisnujt.xeuugli.x1odjw0f')
@@ -85,8 +87,9 @@ def spam_insta(id,pwd,victime,message,nbr_message,navigateur,vitesse_envoie):
 
 def interface_graphique():
 
+    liste_info = ['Nom d utilisateur','Mot de passe','Utilisateur victime','Message','Nombre de messages','Navigateur','Vitesse d envoie']
     def recup_info():
-        if  username_entry.get() == '' or mdp_entry.get() == '' or user_victime_entry.get() == '' or mess_entry.get() == '' or int(nbr_msg_entry.get()) <= 0:
+        if  username_entry.get() == '' or mdp_entry.get() == '' or user_victime_entry.get() == '' or mess_entry.get() == '' or int(nbr_msg_entry.get()) <= 0 :
             CTkMessagebox(title='Erreur', message='Veuillez remplir tout les champs',icon='cancel')
         else :
             spam_insta(username_entry.get(), mdp_entry.get(),  user_victime_entry.get(), mess_entry.get(), int(nbr_msg_entry.get()),choix_navigateur.get(),choix_vitesse.get()/1000)
@@ -100,25 +103,17 @@ def interface_graphique():
 
     frame_intro = CTkFrame(windows)
 
-    titre = CTkLabel(frame_intro, text='Bot Instagram', font=("Courrier", 50))
-    titre.pack()
+    CTkLabel(frame_intro, text='Bot Instagram', font=("Courrier", 50)).pack()
 
-    explication = CTkLabel(frame_intro,
-                           text='Ce programme est un bot instagram qui vous permet d envoyer des messages de masse à vos amis',
-                           font=('Courrier', 15))
-    explication.pack()
+    CTkLabel(frame_intro,text='Ce programme est un bot instagram qui vous permet d envoyer des messages de masse à vos amis',
+                         font=('Courrier', 15)).pack()
 
     frame_intro.pack(side=TOP)
-
     frame_info = CTkFrame(windows)
 
-    CTkLabel(frame_info, text="Nom d'utilisateur").grid(row=0, column=0)
-    CTkLabel(frame_info, text="Mot de passe").grid(row=1, column=0)
-    CTkLabel(frame_info, text="Utilisateur victime").grid(row=2, column=0)
-    CTkLabel(frame_info, text="Message").grid(row=3, column=0)
-    CTkLabel(frame_info, text="Nombre de messages").grid(row=4, column=0)
-    CTkLabel(frame_info, text='Navigateur').grid(row=5,column=0)
-    CTkLabel(frame_info, text='Vitesse d envoie').grid(row=6,column=0)
+    for i in range(len(liste_info)):
+        CTkLabel(frame_info, text=liste_info[i]).grid(row=i,column=0)
+
 
     username_entry = CTkEntry(frame_info)
     username_entry.grid(row=0, column=1)
@@ -137,18 +132,13 @@ def interface_graphique():
 
     choix_navigateur = CTkComboBox(frame_info,values=['Chrome','Firefox','Safari','Edge'])
     choix_navigateur.grid(row=5,column=1)
-    choix_navigateur.set('Chrome')
-    def vitesse(value):
-        print(value/1000)
 
-    choix_vitesse = CTkSlider(frame_info,from_=2000,to=300,command=vitesse)
-    choix_vitesse.place(relx=0.5,rely=0.5,anchor=CENTER)
+    choix_vitesse = CTkSlider(frame_info,from_=2000,to=300)
     choix_vitesse.grid(row=6,column=1)
+
     frame_info.pack(pady=25)
 
-    Lancement_bot_button = CTkButton(windows, text='Lancer le bot', font=("Courrier", 10), command=recup_info).pack(
-        pady=25, fill=X)
-    print(choix_vitesse.get()/1000)
+    CTkButton(windows, text='Lancer le bot', font=("Courrier", 10), command=recup_info).pack(pady=25, fill=X)
 
     windows.mainloop()
 
