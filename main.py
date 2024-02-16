@@ -8,7 +8,7 @@ from customtkinter import *
 from CTkMessagebox import CTkMessagebox
 
 
-def spam_insta(id,pwd,victime,message,nbr_message,navigateur,vitesse_envoie):
+def spam_insta(id: str ,pwd: str ,victime: str ,message: str ,nbr_message: int,navigateur: str,vitesse_envoie: float):
 
 
     if navigateur == 'Chrome':
