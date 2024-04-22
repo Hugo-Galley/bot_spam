@@ -28,8 +28,9 @@ python3 main.py
 ```
 ## Appercu de l'interface
 ![Interface Graphique](assets/appercu.png)
+***
 
 
-### Attention
-- Utilisez ce script avec précaution pour éviter d'être bloqué par Instagram.
-- L'auteur du script n'est pas responsable de l'utilisation abusive de celui-ci.
+> [!CAUTION]
+> - Utilisez ce script avec précaution pour éviter d'être bloqué par Instagram.
+> - L'auteur du script n'est pas responsable de l'utilisation abusive de celui-ci.
