@@ -75,7 +75,7 @@ def spam_insta(id: str ,pwd: str ,victime: str ,message: str ,nbr_message: int,n
     ajout_discussion.click()
     time.sleep(2)
 
-    for i in range(nbr_message):
+    for i in range(nbr_message+1):
 
         time.sleep(vitesse_envoie)
         ajout_message = driver.find_element(By.CSS_SELECTOR, '.xzsf02u.x1a2a7pz.x1n2onr6.x14wi4xw.x1iyjqo2.x1gh3ibb.xisnujt.xeuugli.x1odjw0f')
