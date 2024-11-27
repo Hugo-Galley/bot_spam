@@ -48,13 +48,13 @@ def spam_insta(id: str ,pwd: str ,victime: str ,message: str ,nbr_message: int,n
     bouton_plus_tard.click()
     time.sleep(2)
 
-    no_notif = driver.find_element(By.XPATH, "/html/body/div[3]/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[3]/button[2]")
+    wait = WebDriverWait(driver, 10)
+    bouton_recherche = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div/div/div/div[2]/div/div/div[1]/div[1]/div[2]/div/div/div/div/div[2]/div[5]/div/div/span/div/a/div")))
+    bouton_recherche.click()
+
+    no_notif = wait.until(EC.element_to_be_clickable((By.XPATH,"/html/body/div[5]/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[3]/button[2]")))
     no_notif.click()
     time.sleep(2)
-
-    wait = WebDriverWait(driver, 10)
-    bouton_recherche = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "a.x1i10hfl[href='/direct/inbox/']")))
-    bouton_recherche.click()
 
     time.sleep(2)
     wait = WebDriverWait(driver, 10)
@@ -63,15 +63,15 @@ def spam_insta(id: str ,pwd: str ,victime: str ,message: str ,nbr_message: int,n
     bouton_nouveau_message.click()
     time.sleep(2)
 
-    ajout_nom = driver.find_element(By.XPATH, "/html/body/div[6]/div[1]/div/div[2]/div/div/div/div/div/div/div[1]/div/div[2]/div/div[2]/input")
+    ajout_nom = driver.find_element(By.XPATH, "/html/body/div[5]/div[1]/div/div[2]/div/div/div/div/div/div/div[1]/div/div[2]/div/div[2]/input")
     ajout_nom.send_keys(victime)
     time.sleep(2)
 
-    choix8nom = driver.find_element(By.XPATH, "/html/body/div[6]/div[1]/div/div[2]/div/div/div/div/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div[3]/div/label/div/input")
-    choix8nom.click()
+    choixNom = driver.find_element(By.XPATH, "/html/body/div[5]/div[1]/div/div[2]/div/div/div/div/div/div/div[1]/div/div[3]/div/div[1]/div[1]/div/div/div[3]/div/label/div/input")
+    choixNom.click()
     time.sleep(1)
 
-    ajout_discussion = driver.find_element(By.XPATH, "/html/body/div[6]/div[1]/div/div[2]/div/div/div/div/div/div/div[1]/div/div[4]/div")
+    ajout_discussion = driver.find_element(By.XPATH, "/html/body/div[5]/div[1]/div/div[2]/div/div/div/div/div/div/div[1]/div/div[4]/div")
     ajout_discussion.click()
     time.sleep(2)
 
